@@ -1,7 +1,7 @@
 package models
 
 /** ページング処理で利用するクラス */
-case class Pager[A](var title: String, var pageNum: Int, var totalRows: Int, var twitterUser: Option[A], var dataList: Seq[A]) {
+case class Pager[A](var title: String, var pageNum: Int, var totalRows: Int, var dataList: Seq[A]) {
 
   /** １ページに表時するデータの件数 */
   val maxListCount: Int = 15

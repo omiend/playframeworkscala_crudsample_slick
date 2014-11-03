@@ -1,7 +1,24 @@
-@(pager: Pager[Dummy])(implicit flash: play.api.mvc.Flash)
+@(pager: Pager[Parent])(implicit flash: play.api.mvc.Flash)
 
 @main(pager.title)(flash) {
 
 	@pageNation(pager)
 
+    <table class="table table-bordered">
+      <thead>
+        <th>Parent Name</th>
+        <th>Child's Name</th>
+      </thead>
+      <tbody>
+      @for(parent <- pager.dataList){
+        <tr>
+          <td>
+              No.@parent.id&nbsp;@parent.name&nbsp;@parent.createDate&nbsp;@parent.updateDate<br />
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+
+	@pageNation(pager)
 }
