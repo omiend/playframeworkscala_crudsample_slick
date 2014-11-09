@@ -2,12 +2,13 @@
 
 @main(pager.title)(flash) {
 
-	@pageNation(pager)
+	@pageNation(pager, "parent")
+
+    <a href="@routes.Application.createParent(pager.pageNum)">親レコード作成</a>>
 
     <table class="table table-bordered">
       <thead>
         <th>Parent Name</th>
-        <th>Child's Name</th>
       </thead>
       <tbody>
       @for(parent <- pager.dataList){
@@ -20,5 +21,5 @@
       </tbody>
     </table>
 
-	@pageNation(pager)
+	@pageNation(pager, "parent")
 }

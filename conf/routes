@@ -3,7 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index(p: Int ?= 1)
+GET     /                           controllers.Application.parent(p: Int ?= 1)
+GET     /parent/c                   controllers.Application.createParent(p: Int ?= 1)
+
+GET     /child                      controllers.Application.child(p: Int ?= 1)
+
+GET     /pageNation                 controllers.Application.pageNation(p: Int ?= 1, page: String)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

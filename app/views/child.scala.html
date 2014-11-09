@@ -1,0 +1,24 @@
+@(pager: Pager[(Child, Parent)])(implicit flash: play.api.mvc.Flash)
+
+@main(pager.title)(flash) {
+
+	@pageNation(pager, "child")
+
+    <table class="table table-bordered">
+      <thead>
+        <th>Child Name</th>
+      </thead>
+      <tbody>
+      @for(data <- pager.dataList){
+        <tr>
+          <td>
+              No.@data._1.id&nbsp;@data._1.name&nbsp;@data._1.createDate&nbsp;@data._1.updateDate<br />
+              No.@data._2.id&nbsp;@data._2.name&nbsp;@data._2.createDate&nbsp;@data._2.updateDate<br />
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+
+	@pageNation(pager, "child")
+}

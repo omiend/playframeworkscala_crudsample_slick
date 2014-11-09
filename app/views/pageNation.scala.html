@@ -1,12 +1,12 @@
-@(pager: Pager[_])
+@(pager: Pager[_], targetPage: String)
 <div class="row-fluid">
   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
     <div class="text-center">
       <div class="pagination">
         <ul class="pager">
-          <li class="previous"><a href="@routes.Application.index(1)">最初</a></li>
-          @for(page <- pager.pageNumList){<li class="@if(pager.pageNum==page){active}"><a href="@routes.Application.index(page)">@page</a></li>}
-          <li class="next"><a href="@routes.Application.index(pager.maxPageRowCount)">最後</a></li>
+          <li class="previous"><a href="@routes.Application.pageNation(1, targetPage)">最初</a></li>
+          @for(page <- pager.pageNumList){<li class="@if(pager.pageNum==page){active}"><a href="@routes.Application.pageNation(page, targetPage)">@page</a></li>}
+          <li class="next"><a href="@routes.Application.pageNation(pager.maxPageRowCount, targetPage)">最後</a></li>
         </ul>
       </div> <!-- /pagination -->
     </div>
