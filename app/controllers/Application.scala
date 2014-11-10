@@ -29,8 +29,8 @@ object Application extends Controller {
   /** Parent form */
   val parentForm = Form(
     mapping(
-      "id" -> ignored(None: Option[Long]),
-      "name" -> nonEmptyText,
+      "id"         -> ignored(None: Option[Long]),
+      "name"       -> nonEmptyText,
       "createDate" -> jodaDate,
       "updateDate" -> jodaDate
     )(Parent.apply)(Parent.unapply)
@@ -41,22 +41,20 @@ object Application extends Controller {
     Ok(views.html.createParent(pager, parentForm))
   }
 
-  // def insertParent(pageNum: Int) {
-  //   val parent = parentForm.bindFromRequest.get
+  def insertParent(pageNum: Int) = DBAction { implicit request =>
+    // val parent = parentForm.bindFromRequest.get
+    parentForm.bindFromRequest.fold(
+      formWithErrors => {
+        val pager: Pager[Parent] = Pager[Parent]("トップ", pageNum, Parent.count, Seq.empty)
+        BadRequest(views.html.createParent(pager, formWithErrors))
+      },
+      parent => {
 
-  //       parentForm.bindFromRequest.fold(
-  //         formWithErrors => {
-  //           BadRequest(html.parent(pageNum, formWithErrors))
-  //         },
-  //         festivalAndStage => {
-  //         }
-
-
-
-
-  //   Parent.insert(parent)
-  //   Redirect(routes.Application.parent(pageNum))
-  // }
+        Parent.insert(parent)
+        Redirect(routes.Application.parent(pageNum))
+      }
+    )
+  }
 
   /** Child form */
   val childForm = Form(

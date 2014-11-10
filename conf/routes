@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.parent(p: Int ?= 1)
 GET     /parent/c                   controllers.Application.createParent(p: Int ?= 1)
+POST    /parent/i                   controllers.Application.insertParent(p: Int ?= 1)
 
 GET     /child                      controllers.Application.child(p: Int ?= 1)
 
