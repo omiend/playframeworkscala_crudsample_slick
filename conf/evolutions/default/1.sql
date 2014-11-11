@@ -3,6 +3,8 @@
 create table parent (
   id                        bigint auto_increment not null PRIMARY KEY,
   name                      varchar(255) not null,
+  gender                    varchar(255) not null,
+  birth_date                date not null,
   create_date               datetime not null,
   update_date               datetime not null)
  engine=InnoDB;
@@ -12,8 +14,7 @@ create table child (
   name                      varchar(255) not null,
   parent_id                 bigint not null,
   create_date               datetime not null,
-  update_date               datetime not null,
-  foreign key(parent_id)    references parent(id) on delete cascade)
+  update_date               datetime not null)
  engine=InnoDB;
 
 # --- !Downs

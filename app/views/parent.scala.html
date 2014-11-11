@@ -1,25 +1,46 @@
-@(pager: Pager[Parent])(implicit flash: play.api.mvc.Flash)
+@(pager: Pager[(Parent, List[Child])])(implicit flash: play.api.mvc.Flash)
 
 @main(pager.title)(flash) {
 
 	@pageNation(pager, "parent")
 
-    <a href="@routes.Application.createParent(pager.pageNum)">親レコード作成</a>>
+  <a href="@routes.Application.createParent(pager.pageNum)">親レコード作成</a>
 
-    <table class="table table-bordered">
-      <thead>
-        <th>Parent Name</th>
-      </thead>
-      <tbody>
-      @for(parent <- pager.dataList){
-        <tr>
-          <td>
-              No.@parent.id&nbsp;@parent.name&nbsp;@parent.createDate&nbsp;@parent.updateDate<br />
-          </td>
-        </tr>
-      }
-      </tbody>
-    </table>
+  <table class="table table-bordered">
+    <thead>
+      <th>親レコード</th>
+      <th>子レコード</th>
+    </thead>
+    <tbody>
+    @for(parent <- pager.dataList){
+      <tr>
+        <td>
+          No:@parent._1.id<br/>
+          Name:@parent._1.name<br/>
+          Created Date:@parent._1.createDate<br/>
+          Updated Date:@parent._1.updateDate<br/>
+          <a href="@routes.Application.editParent(pager.pageNum, parent._1.id.get)">edit</a><br/>
+          <a href="@routes.Application.createChild(pager.pageNum, parent._1.id.get)">子レコード作成</a>
+        </td>
+        <td>
+          <table class="table table-bordered">
+            @for(child <- parent._2){
+            <tr>
+                <td>
+                  No:@child.id<br/>
+                  Name:@child.name<br/>
+                  Created Date:@child.createDate<br/>
+                  Updated Date:@child.updateDate<br/>
+                  <a href="@routes.Application.editChild(pager.pageNum, child.id.get, parent._1.id.get)">edit</a><br/>
+                </td>
+            </tr>
+            }
+          </table>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
 
 	@pageNation(pager, "parent")
 }

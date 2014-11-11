@@ -1,14 +1,14 @@
-@(pager: Pager[Parent], parentForm: Form[Parent])(implicit flash: play.api.mvc.Flash)
+@(pager: Pager[Parent], parentForm: Form[Parent], genderOptions: Seq[(String, String)])(implicit flash: play.api.mvc.Flash)
 @import helper._
 
 @main(pager.title)(flash) {
 
-    @form(routes.Application.insertParent(pager.pageNum)) {
+    @form(routes.Application.insertParent(pager.pageNum), 'class -> "form-inline") {
 
         <fieldset>
-
-            @inputText(parentForm("name"), '_label -> "Parent name")
-
+            @inputText(parentForm("name"), 'class -> "form-control", '_label -> "Parent Name")
+            @select(parentForm("gender"), options = genderOptions, 'class -> "form-control select select-inverse mrs mbm", '_label -> "Gender", Symbol("data-toggle") -> "select")
+            @inputDate(parentForm("birthDate"), 'class -> "form-control", '_label -> "Birth Date")
         </fieldset>
 
         <div class="actions">

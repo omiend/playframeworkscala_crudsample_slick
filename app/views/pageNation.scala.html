@@ -3,9 +3,11 @@
   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
     <div class="text-center">
       <div class="pagination">
-        <ul class="pager">
+        <ul>
           <li class="previous"><a href="@routes.Application.pageNation(1, targetPage)">最初</a></li>
-          @for(page <- pager.pageNumList){<li class="@if(pager.pageNum==page){active}"><a href="@routes.Application.pageNation(page, targetPage)">@page</a></li>}
+          @for(page <- pager.pageNumList){
+            <li class="@if(pager.pageNum==page){active}"><a href="@routes.Application.pageNation(page, targetPage)">@page</a></li>
+          }
           <li class="next"><a href="@routes.Application.pageNation(pager.maxPageRowCount, targetPage)">最後</a></li>
         </ul>
       </div> <!-- /pagination -->

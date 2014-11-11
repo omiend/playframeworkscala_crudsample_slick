@@ -6,11 +6,19 @@
 GET     /                           controllers.Application.parent(p: Int ?= 1)
 GET     /parent/c                   controllers.Application.createParent(p: Int ?= 1)
 POST    /parent/i                   controllers.Application.insertParent(p: Int ?= 1)
+GET     /parent/e                   controllers.Application.editParent(p: Int ?= 1, id: Long)
+POST    /parent/u                   controllers.Application.updateParent(p: Int ?= 1, id: Long)
+POST    /parent/d                   controllers.Application.deleteParent(p: Int ?= 1, id: Long)
 
 GET     /child                      controllers.Application.child(p: Int ?= 1)
+GET     /child/c                    controllers.Application.createChild(p: Int ?= 1, parentId: Long)
+POST    /child/i                    controllers.Application.insertChild(p: Int ?= 1, parentId: Long)
+GET     /child/e                    controllers.Application.editChild(p: Int ?= 1, id: Long, parentId: Long)
+POST    /child/u                    controllers.Application.updateChild(p: Int ?= 1, id: Long, parentId: Long)
+POST    /child/d                    controllers.Application.deleteChild(p: Int ?= 1, id: Long)
+
 
 GET     /pageNation                 controllers.Application.pageNation(p: Int ?= 1, page: String)
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
