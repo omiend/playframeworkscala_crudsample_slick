@@ -13,6 +13,10 @@ import org.joda.time.DateTime
 
 object Application extends Controller {
 
+  def index = Action { implicit request =>
+    Ok(views.html.index("トップ"))
+  }
+
   def parent(pageNum: Int) = DBAction { implicit request =>
   	val pager: Pager[(Parent, List[Child])] = Pager[(Parent, List[Child])]("トップ", pageNum, Parent.count, Seq.empty)
   	pager.dataList = Parent.findOffsetWithChildList((pager.pageNum * pager.maxListCount - pager.maxListCount), pager.maxListCount)
@@ -33,14 +37,14 @@ object Application extends Controller {
   def getGenderOptions: Seq[(String, String)] = Seq("0" -> "男", "1" -> "女")
 
   def createParent(pageNum: Int) = Action { implicit request =>
-    val pager: Pager[Parent] = Pager[Parent]("親レコード作成", pageNum, 0, Seq.empty)
+    val pager: Pager[Parent] = Pager[Parent]("Create Parent Record", pageNum, 0, Seq.empty)
     Ok(views.html.createParent(pager, parentForm, getGenderOptions))
   }
 
   def insertParent(pageNum: Int) = DBAction { implicit request =>
     parentForm.bindFromRequest.fold(
       formWithErrors => {
-        val pager: Pager[Parent] = Pager[Parent]("親レコード作成", pageNum, 0, Seq.empty)
+        val pager: Pager[Parent] = Pager[Parent]("Create Parent Record", pageNum, 0, Seq.empty)
         BadRequest(views.html.createParent(pager, formWithErrors, getGenderOptions))
       },
       parent => {
