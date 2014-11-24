@@ -37,14 +37,14 @@ object Application extends Controller {
   def getGenderOptions: Seq[(String, String)] = Seq("0" -> "男", "1" -> "女")
 
   def createParent(pageNum: Int) = Action { implicit request =>
-    val pager: Pager[Parent] = Pager[Parent]("Create Parent Record", pageNum, 0, Seq.empty)
+    val pager: Pager[Parent] = Pager[Parent]("親レコード作成", pageNum, 0, Seq.empty)
     Ok(views.html.createParent(pager, parentForm, getGenderOptions))
   }
 
   def insertParent(pageNum: Int) = DBAction { implicit request =>
     parentForm.bindFromRequest.fold(
       formWithErrors => {
-        val pager: Pager[Parent] = Pager[Parent]("Create Parent Record", pageNum, 0, Seq.empty)
+        val pager: Pager[Parent] = Pager[Parent]("親レコード作成", pageNum, 0, Seq.empty)
         BadRequest(views.html.createParent(pager, formWithErrors, getGenderOptions))
       },
       parent => {
@@ -151,9 +151,6 @@ object Application extends Controller {
     Child.delete(id)
     Redirect(routes.Application.child(pageNum))
   }
-
-
-
 
   def pageNation(pageNum: Int, page: String) = Action { implicit request =>
     page match {

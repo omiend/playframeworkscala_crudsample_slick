@@ -1,13 +1,8 @@
 name := """playframeworkscala_crudsample_slick"""
-
 version := "1.0-SNAPSHOT"
-
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
-
-crossScalaVersions := Seq("2.10.4", "2.11.1")
-
+crossScalaVersions := Seq("2.10.4", "2.11.2")
 scalaVersion := "2.11.1"
-
 libraryDependencies ++= Seq(
    jdbc
   ,"mysql" % "mysql-connector-java" % "5.1.20"

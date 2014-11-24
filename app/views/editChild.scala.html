@@ -7,14 +7,14 @@
       @inputText(childForm("name"), '_label -> "Child name")
     </fieldset>
     <div class="actions">
-      <input type="submit" value="Update this Child" class="btn primary"> or
+      <input type="submit" value="Update this Child" class="btn btn-primary"> or
       <a href="@routes.Application.child(pager.pageNum)" class="btn">Cancel</a>
     </div>
 	}
 
   @form(routes.Application.deleteChild(pager.pageNum, id)) {
     <div class="actions">
-      <input type="submit" value="Delete this Child" class="btn danger">
+      <input type="submit" value="Delete this Child" class="btn btn-danger">
     </div>
   }
 }

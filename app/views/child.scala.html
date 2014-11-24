@@ -6,14 +6,25 @@
 
     <table class="table table-bordered">
       <thead>
-        <th>Child Name</th>
+        <th>子レコード</th>
+        <th>親レコード</th>
       </thead>
       <tbody>
       @for(data <- pager.dataList){
         <tr>
           <td>
-              No.@data._1.id&nbsp;@data._1.name&nbsp;@data._1.createDate&nbsp;@data._1.updateDate<br />
-              No.@data._2.id&nbsp;@data._2.name&nbsp;@data._2.createDate&nbsp;@data._2.updateDate<br />
+              No.@data._1.id<br />
+              @data._1.name<br />
+              @data._1.createDate<br />
+              @data._1.updateDate<br />
+              <a href="@routes.Application.editChild(pager.pageNum, data._1.id.get, data._2.id.get)">edit</a><br/>
+          </td>
+          <td>
+              No.@data._2.id<br />
+              @data._2.name<br />
+              @data._2.createDate<br />
+              @data._2.updateDate<br />
+              <a href="@routes.Application.editParent(pager.pageNum, data._2.id.get)">edit</a><br/>
           </td>
         </tr>
       }
